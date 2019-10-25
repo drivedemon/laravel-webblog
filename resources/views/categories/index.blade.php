@@ -10,7 +10,7 @@
           @endif
             <div class="card">
                 <div class="card-header">
-                  ประเภทบทความ
+                  ประเภทบทความทั้งหมด {{$categories->total()}}
                   <a href="{{route('categories.create')}}" class="btn btn-success btn-sm float-md-right ">เพิ่มประเภทบทความ</a>
                 </div>
                 <div class="card-body">
@@ -23,7 +23,7 @@
                         <table class="table table-bordered table-hover">
                           <thead>
                             <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                              <th>จำนวนประเภทบทความทั้งหมด {{$categories->total()}} </th>
+                              <th>ชื่อประเภทบทความ </th>
                               <th width="10%"></th>
                               <th width="10%"></th>
                             </tr>

@@ -13,7 +13,7 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,21 @@ class UpdatePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+          'title' => 'required',
+          'description' => 'required|max:100',
+          'content' => 'required'
         ];
     }
+
+    // custom error message
+    public function messages()
+     {
+        return [
+          'title.required' => 'กรุณากรอกข้อมูล ชื่อบทความ',
+          'description.required' => 'กรุณากรอกข้อมูล คำอธิบาย',
+          'content.required' => 'กรุณากรอกข้อมูล เนื้อหา',
+          'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
+          'max' => 'จำนวนตัวอักษรเกิน 100 ตัว'
+        ];
+     }
 }

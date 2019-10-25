@@ -24,7 +24,7 @@
             @endif
             <div class="form-group row">
                 <label for="postname" class="col-md-1 col-form-label"></label>
-                <label for="postname" class="col-md-2 col-form-label">ชื่อประเภทบทความ : </label>
+                <label for="postname" class="col-md-2 col-form-label">ประเภทบทความ <span style="color:red;">*</span></label>
                 <div class="col-md-7">
                   <input type="text" class="form-control" name="name" id="postname" value="{{isset($category)?$category->name:''}}">
                 </div>

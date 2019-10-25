@@ -27,6 +27,7 @@ class CreatePostRequest extends FormRequest
           'title' => 'required|unique:posts',
           'description' => 'required|max:100',
           'content' => 'required',
+          'image' => 'required|image'
         ];
     }
 
@@ -34,7 +35,10 @@ class CreatePostRequest extends FormRequest
     public function messages()
      {
         return [
-          'required' => 'กรุณากรอกข้อมูล',
+          'title.required' => 'กรุณากรอกข้อมูล ชื่อบทความ',
+          'description.required' => 'กรุณากรอกข้อมูล คำอธิบาย',
+          'content.required' => 'กรุณากรอกข้อมูล เนื้อหา',
+          'image.required' => 'กรุณาใส่รูปภาพ',
           'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
           'max' => 'จำนวนตัวอักษรเกิน 100 ตัว'
         ];
