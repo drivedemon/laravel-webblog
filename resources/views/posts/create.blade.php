@@ -24,6 +24,21 @@
             @endif
             <div class="form-group row">
               <label for="" class="col-md-1 col-form-label"></label>
+              <label for="" class="col-md-2 col-form-label">ประเภทบทความ <span style="color:red;">*</span></label>
+              <div class="col-md-5">
+                <select class="form-control" name="category">
+                  @foreach($categories as $category)
+                    <option value="{{$category->id}}"
+                      @if($category->id == $post->category->id)
+                        selected
+                      @endif
+                      >{{$category->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="" class="col-md-1 col-form-label"></label>
               <label for="" class="col-md-2 col-form-label">ชื่อบทความ <span style="color:red;">*</span></label>
               <div class="col-md-7">
                 <input type="text" class="form-control" name="title" id="" value="{{isset($post)?$post->title:''}}">

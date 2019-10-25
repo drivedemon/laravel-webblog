@@ -25,9 +25,10 @@ class CreatePostRequest extends FormRequest
     {
         return [
           'title' => 'required|unique:posts',
-          'description' => 'required|max:100',
+          'description' => 'required|max:50',
           'content' => 'required',
-          'image' => 'required|image'
+          'image' => 'required|image',
+          'category' => 'required'
         ];
     }
 
@@ -40,7 +41,7 @@ class CreatePostRequest extends FormRequest
           'content.required' => 'กรุณากรอกข้อมูล เนื้อหา',
           'image.required' => 'กรุณาใส่รูปภาพ',
           'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
-          'max' => 'จำนวนตัวอักษรเกิน 100 ตัว'
+          'max' => 'จำนวนตัวอักษรเกิน 50 ตัว'
         ];
      }
 }

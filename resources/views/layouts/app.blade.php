@@ -121,6 +121,22 @@
   </nav>
   @endauth
   <main class="py-4">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          @if(Session()->has('success'))
+          <div class="alert alert-success">
+            {{Session()->get('success')}}
+          </div>
+          @endif
+          @if(Session()->has('error'))
+          <div class="alert alert-warning">
+            {{Session()->get('error')}}
+          </div>
+          @endif
+        </div>
+      </div>
+    </div>
     @yield('content')
   </main>
 </div>

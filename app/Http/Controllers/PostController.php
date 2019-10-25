@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
+use App\Http\Middleware\VerifyCategory;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -14,6 +16,11 @@ class PostController extends Controller
   *
   * @return \Illuminate\Http\Response
   */
+  public function __construct() {
+    $this->middleware('verifyCategory')->only(['index', 'create', 'store']);
+  }
+
+
   public function index()
   {
     return view('posts.index')->with('posts', Post::orderBy('title', 'asc')->paginate(7));
@@ -26,7 +33,7 @@ class PostController extends Controller
   */
   public function create()
   {
-    return view('posts.create');
+    return view('posts.create')->with('categories', Category::orderBy('name', 'asc')->get());
   }
 
   /**
@@ -42,7 +49,8 @@ class PostController extends Controller
       'title' => $request->title,
       'description' => $request->description,
       'content' => $request->content,
-      'image' => $image
+      'image' => $image,
+      'category_id'=> $request->category,
     ]);
     Session()->flash('success', 'บันทึกข้อมูลเรียบร้อย');
     return redirect(route('posts.index'));
@@ -67,7 +75,7 @@ class PostController extends Controller
   */
   public function edit(Post $post)
   {
-    return view('posts.create')->with('post', $post);
+    return view('posts.create')->with('post', $post)->with('categories', Category::all());
   }
 
   /**
