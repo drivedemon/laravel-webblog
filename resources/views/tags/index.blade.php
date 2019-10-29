@@ -20,9 +20,8 @@
                           <table class="table table-bordered table-hover">
                             <thead>
                               <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                                <th width="15%"></th>
                                 <th class="text text-center" style="vertical-align: middle;">ชื่อแท็ก</th>
-                                <th class="text text-center" width="15%">ประเภทแท็ก</th>
+                                <th class="text text-center" width="15%">จำนวนบทความ</th>
                                 <th width="10%"></th>
                                 <th width="10%"></th>
                               </tr>
@@ -30,13 +29,8 @@
                             <tbody>
                               @foreach($tags->all() as $tag)
                                 <tr>
-                                  <td align="center"><img src="storage/{{$tag->image}}" width="90px" height="70px"></td>
-                                  <td>{{$tag->title}}<br>
-                                    <small class="text-muted">&emsp; - {{$tag->description}}</small>
-                                  </td>
-                                  <td class="text-center">
-                                    <a href="{{route('tags.edit', $tag->category->id)}}">{{$tag->category->name}}</a>
-                                  </td>
+                                  <td>&emsp;{{$tag->name}}</td>
+                                  <td class="text-center">{{$tag->post->count()}}</td>
                                   <td class="text-center">
                                     <a href="{{route('tags.edit', $tag->id)}}" class="btn btn-info btn-sm">แก้ไข</a>
                                   </td>

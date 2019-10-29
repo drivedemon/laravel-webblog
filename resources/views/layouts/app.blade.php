@@ -93,7 +93,7 @@
             <a class="nav-link" href="{{route('categories.index')}}">ประเภทบทความ</a>
           </li>
           <li class="nav-item-cus">
-            <a class="nav-link" href="#">แท็กบทความ</a>
+            <a class="nav-link" href="{{route('tags.index')}}">แท็กบทความ</a>
           </li>
           <li class="nav-item-cus dropdown">
             <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -130,7 +130,7 @@
           </div>
           @endif
           @if(Session()->has('error'))
-          <div class="alert alert-warning">
+          <div class="alert alert-danger">
             {{Session()->get('error')}}
           </div>
           @endif

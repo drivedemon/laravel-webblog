@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 use App\Http\Middleware\VerifyCategory;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
@@ -33,7 +34,7 @@ class PostController extends Controller
   */
   public function create()
   {
-    return view('posts.create')->with('categories', Category::orderBy('name', 'asc')->get());
+    return view('posts.create')->with('categories', Category::orderBy('name', 'asc')->get())->with('tags', Tag::all());
   }
 
   /**
@@ -45,13 +46,16 @@ class PostController extends Controller
   public function store(CreatePostRequest $request)
   {
     $image = $request->image->store('posts_image');
-    Post::create([
+    $post = Post::create([
       'title' => $request->title,
       'description' => $request->description,
       'content' => $request->content,
       'image' => $image,
       'category_id'=> $request->category,
+      'user_id' => auth()->user()->id
     ]);
+      $post->tag()->attach($request->tags);
+
     Session()->flash('success', 'บันทึกข้อมูลเรียบร้อย');
     return redirect(route('posts.index'));
   }
@@ -75,7 +79,7 @@ class PostController extends Controller
   */
   public function edit(Post $post)
   {
-    return view('posts.create')->with('post', $post)->with('categories', Category::all());
+    return view('posts.create')->with('post', $post)->with('categories', Category::all())->with('tags', Tag::all());
   }
 
   /**
@@ -87,12 +91,13 @@ class PostController extends Controller
   */
   public function update(UpdatePostRequest $request, Post $post)
   {
-    $data = $request->only(['title', 'description', 'content']);
+    $data = $request->only(['title', 'description', 'content', 'category']);
     if ($request->hasFile('image')) {
       $image = $request->image->store('posts_image');
       $post->deleteImage();
       $data['image'] = $image;
     }
+      $post->tag()->sync($request->tags);
 
     $post->update($data);
     Session()->flash('success', 'อัปเดตข้อมูลเรียบร้อย');
@@ -108,6 +113,7 @@ class PostController extends Controller
   public function destroy(Post $post)
   {
     $post->delete();
+    $post->tag()->detach($post->post_id);
     $post->deleteImage();
     Session()->flash('success', 'ลบข้อมูลเรียบร้อย');
     return redirect(route('posts.index'));

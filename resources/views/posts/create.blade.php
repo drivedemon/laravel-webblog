@@ -29,13 +29,37 @@
                 <select class="form-control" name="category">
                   @foreach($categories as $category)
                     <option value="{{$category->id}}"
-                      @if($category->id == $post->category->id)
-                        selected
+                      @if(isset($post))
+                        @if($category->id == $post->category_id)
+                          selected
+                        @endif
                       @endif
                       >{{$category->name}}</option>
                   @endforeach
                 </select>
               </div>
+            </div>
+            <div class="form-group row">
+            @if ($tags->count() > 0)
+              <label for="" class="col-md-1 col-form-label"></label>
+              <label for="" class="col-md-2 col-form-label">แท็ก <span style="color:red;">*</span></label>
+              <div class="col-md-7">
+                  <select class="form-control" name="tags[]" id="select2" multiple>
+                    @foreach($tags as $tag)
+                      <option value="{{$tag->id}}"
+                        @if(isset($post))
+                          @if($post->hasTag($tag->id))
+                            selected
+                          @endif
+                        @endif
+                        >{{$tag->name}}</option>
+                    @endforeach
+                  </select>
+              </div>
+            @else
+              <label for="" class="col-md-3 col-form-label"></label>
+              <small class="col-md-9" style="color:gray;">ตอนนี้ไม่มีแท็กบทความ หากต้องการเพิ่ม <a href="{{route('tags.create')}}">คลิ๊ก</a></small>
+            @endif
             </div>
             <div class="form-group row">
               <label for="" class="col-md-1 col-form-label"></label>
@@ -84,9 +108,15 @@
     </div>
   </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.0/trix.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/css/select2.min.css" rel="stylesheet" />
 <script type="text/javascript">
+$(document).ready(function() {
+    $('#select2').select2();
+});
+
 var input = document.getElementById( 'file-upload' );
 var infoArea = document.getElementById( 'file-upload-filename' );
 input.addEventListener( 'change', showFileName );

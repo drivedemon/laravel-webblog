@@ -28,7 +28,8 @@ class CreatePostRequest extends FormRequest
           'description' => 'required|max:50',
           'content' => 'required',
           'image' => 'required|image',
-          'category' => 'required'
+          'category' => 'required',
+          'tags' => 'required'
         ];
     }
 
@@ -40,6 +41,8 @@ class CreatePostRequest extends FormRequest
           'description.required' => 'กรุณากรอกข้อมูล คำอธิบาย',
           'content.required' => 'กรุณากรอกข้อมูล เนื้อหา',
           'image.required' => 'กรุณาใส่รูปภาพ',
+          'category.required' => 'กรุณากรอกข้อมูล ประเภทบทความ',
+          'tags.required' => 'กรุณากรอกข้อมูล แท็กบทความอย่างน้อย 1 แท็ก',
           'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
           'max' => 'จำนวนตัวอักษรเกิน 50 ตัว'
         ];

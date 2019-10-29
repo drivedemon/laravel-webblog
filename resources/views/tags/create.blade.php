@@ -26,7 +26,7 @@
               <label for="" class="col-md-1 col-form-label"></label>
               <label for="" class="col-md-2 col-form-label">ชื่อแท็ก <span style="color:red;">*</span></label>
               <div class="col-md-7">
-                <input type="text" class="form-control" name="title" id="" value="{{isset($tag)?$tag->title:''}}">
+                <input type="text" class="form-control" name="name" value="{{isset($tag)?$tag->name:''}}">
               </div>
             </div>
             <div class="form-group text-center">

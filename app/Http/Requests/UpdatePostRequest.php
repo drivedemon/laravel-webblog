@@ -27,7 +27,8 @@ class UpdatePostRequest extends FormRequest
           'title' => 'required',
           'description' => 'required|max:50',
           'content' => 'required',
-          'category' => 'required'
+          'category' => 'required',
+          'tags' => 'required'
         ];
     }
 
@@ -38,6 +39,8 @@ class UpdatePostRequest extends FormRequest
           'title.required' => 'กรุณากรอกข้อมูล ชื่อบทความ',
           'description.required' => 'กรุณากรอกข้อมูล คำอธิบาย',
           'content.required' => 'กรุณากรอกข้อมูล เนื้อหา',
+          'category.required' => 'กรุณากรอกข้อมูล ประเภทบทความ',
+          'tags.required' => 'กรุณากรอกข้อมูล แท็กบทความอย่างน้อย 1 แท็ก',
           'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
           'max' => 'จำนวนตัวอักษรเกิน 50 ตัว'
         ];
