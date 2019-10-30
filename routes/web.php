@@ -22,10 +22,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
     Route::resource('tags', 'TagController');
-    // admin approve
-    Route::get('users/status', 'UserController@approveIndex')->name('users.status');
-    Route::put('users/approve/{user}', 'UserController@approve')->name('users.approve');
-    Route::put('users/noapprove/{user}', 'UserController@noapprove')->name('users.noapprove');
+    Route::group(['middleware' => 'admin'], function () {
+      // admin approve
+      Route::get('users/status', 'UserController@approveIndex')->name('users.status');
+      Route::put('users/approve/{user}', 'UserController@approve')->name('users.approve');
+      Route::put('users/noapprove/{user}', 'UserController@noapprove')->name('users.noapprove');
+      // check staus user
+      Route::get('users/detail', 'UserController@detailIndex')->name('users.detail');
+    });
   });
   Route::get('/home', 'HomeController@index')->name('home');
 });
