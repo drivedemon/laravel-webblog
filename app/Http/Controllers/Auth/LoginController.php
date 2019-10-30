@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
      protected function redirectTo()
      {
-       if (auth()->user()->role == 'pending') {
+       if (auth()->user()->role == 'pending' || auth()->user()->role == 'reader') {
          return '/';
        } else {
          return '/home';

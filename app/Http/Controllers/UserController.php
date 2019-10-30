@@ -8,7 +8,10 @@ use App\User;
 class UserController extends Controller
 {
   public function approveIndex() {
-    return view('users.approve.index')->with('users', User::where('role', 'pending')->where('role_pending', '!=', 'noapprove')->orderBy('created_at', 'asc')->paginate(7));
+    $results = User::where('role', 'pending')->where('role_pending', '!=', 'noapprove')->orderBy('created_at', 'asc')->paginate(10);
+    $rank = $results->firstItem();
+    return view('users.approve.index', ['users' => $results, 'rank' => $rank]);
+
   }
 
   public function approve(Request $request, User $user) {
@@ -17,7 +20,7 @@ class UserController extends Controller
     return redirect(route('users.status'));
   }
 
-  public function noapprove(Request $request, User $user) {
+  public function noapprove(User $user) {
     $user->update(['role_pending' => 'noapprove']);
     Session()->flash('success', 'ดำเนินการเรียบร้อย');
     return redirect(route('users.status'));

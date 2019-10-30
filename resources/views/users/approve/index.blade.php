@@ -17,23 +17,25 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                      <th class="text text-center" width="5%" style="vertical-align: middle;">ลำดับ</th>
                       <th class="text text-center" width="25%" style="vertical-align: middle;">วันที่ยื่นเรื่อง</th>
                       <th class="text text-center" style="vertical-align: middle;">ชื่อ</th>
-                      <th class="text text-center" width="15%">ประเภทที่ต้องการ</th>
+                      <th class="text text-center" width="16%">ประเภทที่ต้องการ</th>
                       <th class="text text-center" width="23%" style="vertical-align: middle;">ดำเนินการ</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach($users as $user)
+                    @foreach($users as $key => $user)
                     <tr>
+                      <td class="text-center">{{$rank++}}</td>
                       <td>{{DateThai($user->created_at)}}</td>
                       <td class="text-left">- {{$user->name}}</td>
-                      <td class="text-center">{{$user->role_pending}}</td>
+                      <td class="text-center">{{convertTypeName($user->role_pending, 1)}}</td>
                       <td class="text-center">
                         <form class="delete_form" action="{{route('users.noapprove', $user->id)}}" method="post">
                           @csrf
                           @method('put')
-                          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalapprove">
+                          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalapprove{{$key}}">
                             อนุมัติ
                           </button>
                           &nbsp;
@@ -42,12 +44,13 @@
                       </td>
                     </tr>
 
+
                     <!-- Modal -->
-                    <div class="modal fade" id="Modalapprove" tabindex="-1" role="dialog" aria-labelledby="Modalapprove" aria-hidden="true">
+                    <div class="modal fade" id="Modalapprove{{$key}}" tabindex="-1" role="dialog" aria-labelledby="Modalapprove{{$key}}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">รายละเอียดคำขอลงทะเบียน</h5>
+                            <h5 class="modal-title" id="Modalapprove">รายละเอียดคำขอลงทะเบียน</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -56,7 +59,7 @@
                             <div class="form-group row">
                               <div class="col-md-1"></div>
                               <div class="col-md-3">
-                                ชื่อ :
+                                <b>ชื่อ :</b>
                               </div>
                               <div class="col-md-7">
                                 {{$user->name}}
@@ -65,7 +68,7 @@
                             <div class="form-group row">
                               <div class="col-md-1"></div>
                               <div class="col-md-3">
-                                Email :
+                                <b>Email :</b>
                               </div>
                               <div class="col-md-7">
                                 {{$user->email}}
@@ -74,7 +77,7 @@
                             <div class="form-group row">
                               <div class="col-md-1"></div>
                               <div class="col-md-3">
-                                วันที่ยื่นเรื่อง :
+                                <b>วันที่ยื่นเรื่อง :</b>
                               </div>
                               <div class="col-md-7">
                                 {{DateThai($user->created_at)}}
@@ -83,34 +86,36 @@
                             <div class="form-group row">
                               <div class="col-md-1"></div>
                               <div class="col-md-3">
-                                ประเภท :
+                                <b>ประเภท :</b>
                               </div>
                               <div class="col-md-7">
-                                {{$user->role_pending}}
+                                {{convertTypeName($user->role_pending, 1)}}
                               </div>
                             </div>
                             <div class="form-group row">
                               <div class="col-md-1"></div>
                               <div class="col-md-3">
-                                สถานะ :
+                                <b>สถานะ :</b>
                               </div>
                               <div class="col-md-7">
-                                {{$user->role}}
+                                {{convertTypeName($user->role, 2)}}
                               </div>
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                             <form action="{{route('users.approve', $user->id)}}" method="post" enctype="multipart/form-data">
                               @csrf
                               @method('put')
                               <input type="hidden" name="role" value="{{$user->role_pending}}">
                               <input type="submit" name="" value="อนุมัติ" class="btn btn-success">
                             </form>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
                           </div>
                         </div>
                       </div>
                     </div>
+
+
                     @endforeach
                   </tbody>
                 </table>
@@ -147,15 +152,25 @@
 </div>
 </div>
 </div>
+
+
 <script type="text/javascript">
 $(document).ready(function() {
   $('.delete_form').on('submit', function() {
-    if (confirm('ต้องการลบข้อมูลใช่ไหม')) {
+    if (confirm('ไม่อนุมัติผู้ใช้งานใช่ไหม')) {
       return true;
     } else {
       return false;
     }
   })
+
+  $('#Modalapprove').on('show', function(e) {
+    var link     = e.relatedTarget(),
+        modal    = $(this),
+        email    = link.data("email");
+
+    modal.find("#email").val(email);
+});
 })
 </script>
 @endsection

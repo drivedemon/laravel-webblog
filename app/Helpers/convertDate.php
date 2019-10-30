@@ -10,4 +10,13 @@
 		$strMonthThai=$strMonthCut[$strMonth];
 		return "$strDay $strMonthThai $strYear $strHour:$strMinute น.";
 	}
+
+  function convertTypeName($str, $ind) {
+    if ($ind == 1) {
+      $tname = ($str == 'writer')?'เขียนบทความ':'อ่านบทความ';
+    } else {
+      $tname = ($str == 'pending')?'รออุนมัติ':'ไม่อุนมัติ';
+    }
+    return $tname;
+  }
 ?>
