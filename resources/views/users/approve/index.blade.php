@@ -8,12 +8,12 @@
           จำนวนรายการทั้งหมด {{$users->total()}} รายการ
         </div>
         <div class="card-body">
-
           <div class="container">
             <div class="row">
               <div class="col-md-1">
               </div>
               <div class="col-md-10">
+                @if ($users->count() > 0)
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
@@ -43,8 +43,6 @@
                         </form>
                       </td>
                     </tr>
-
-
                     <!-- Modal -->
                     <div class="modal fade" id="Modalapprove{{$key}}" tabindex="-1" role="dialog" aria-labelledby="Modalapprove{{$key}}" aria-hidden="true">
                       <div class="modal-dialog" role="document">
@@ -114,46 +112,39 @@
                         </div>
                       </div>
                     </div>
-
-
                     @endforeach
                   </tbody>
                 </table>
-
-                <!-- <table class="table table-bordered table-hover">
-                <thead>
-                <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                <th>แท็ก</th>
-              </tr>
-            </thead>
-            <tbody>
-            <th class="text-center">
-            ไม่มีแท็ก
-          </th>
-        </tbody>
-      </table> -->
-
-    </div>
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-11">
-      {{$users->links()}}
+                @else
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                      <th>คำขอ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <th class="text-center">
+                      ไม่มีคำขอ
+                    </th>
+                  </tbody>
+                </table>
+                @endif
+              </div>
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-1">
+              </div>
+              <div class="col-md-11">
+                {{$users->links()}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-
-
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
 <script type="text/javascript">
 $(document).ready(function() {
   $('.delete_form').on('submit', function() {
@@ -163,14 +154,6 @@ $(document).ready(function() {
       return false;
     }
   })
-
-  $('#Modalapprove').on('show', function(e) {
-    var link     = e.relatedTarget(),
-        modal    = $(this),
-        email    = link.data("email");
-
-    modal.find("#email").val(email);
-});
 })
 </script>
 @endsection
