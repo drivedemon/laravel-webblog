@@ -19,6 +19,7 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dropdown.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <div id="app">
@@ -52,7 +53,17 @@
             @else
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{ Auth::user()->name }} <span class="caret"></span>
+                {{ Auth::user()->name }}
+                [
+                @if(Auth::user()->role == 'admin')
+                  <i class="fa fa-vcard-o"></i> {{Auth::user()->role}}
+                @elseif(Auth::user()->role == 'writer')
+                  <i class="fa fa-user-plus"></i> {{Auth::user()->role}}
+                @else
+                  <i class="fa fa-user"></i> {{Auth::user()->role}}
+                @endif
+                ]
+                <span class="caret"></span>
               </a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -86,35 +97,42 @@
           <li class="nav-item-cus">
             <a class="nav-link" href="{{ url('/home') }}">หน้าแรก <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item-cus">
-            <a class="nav-link" href="{{route('posts.index')}}">บทความ</a>
-          </li>
-          <li class="nav-item-cus">
-            <a class="nav-link" href="{{route('categories.index')}}">ประเภทบทความ</a>
-          </li>
-          <li class="nav-item-cus">
-            <a class="nav-link" href="{{route('tags.index')}}">แท็กบทความ</a>
-          </li>
-          <li class="nav-item-cus dropdown">
-            <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              ตั้งค่าระบบ
-            </a>
-            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-          <li class="nav-item-cus dropdown">
-            <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              จัดการผู้ใช้งาน
-            </a>
-            <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
+          @if(auth()->user()->role != 'pending')
+            <li class="nav-item-cus">
+              <a class="nav-link" href="{{route('posts.index')}}">บทความ</a>
+            </li>
+            <li class="nav-item-cus">
+              <a class="nav-link" href="{{route('categories.index')}}">ประเภทบทความ</a>
+            </li>
+            <li class="nav-item-cus">
+              <a class="nav-link" href="{{route('tags.index')}}">แท็กบทความ</a>
+            </li>
+            @if(auth()->user()->isAdmin(auth()->user()->role))
+              <li class="nav-item-cus dropdown">
+                <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  ตั้งค่าระบบ
+                </a>
+                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">ข่าวสาร / ประกาศ</a>
+                  <a class="dropdown-item" href="#">คู่มือการใช้งาน</a>
+                </div>
+              </li>
+              <li class="nav-item-cus dropdown">
+                <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  จัดการผู้ใช้งาน
+                </a>
+                <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="{{route('users.status')}}">พิจารณาคำขอ</a>
+                  <a class="dropdown-item" href="#">ผู้ใช้งาน</a>
+                  <a class="dropdown-item" href="#">ผู้ดูแลระบบ</a>
+                </div>
+              </li>
+            @else
+              <li class="nav-item-cus">
+                <a class="nav-link" href="#">คู่มือการใช้งาน</a>
+              </li>
+            @endif
+          @endif
         </ul>
       </div>
     </div>

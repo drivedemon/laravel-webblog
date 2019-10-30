@@ -14,7 +14,11 @@
                         </div>
                     @endif
 
-                    Welcome!
+                    @if (auth()->user()->isAdmin(auth()->user()->role))
+                      Welcome!
+                    @else
+                      Status : Pending for approve
+                    @endif
                 </div>
             </div>
         </div>

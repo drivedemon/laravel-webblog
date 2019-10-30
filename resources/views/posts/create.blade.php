@@ -95,7 +95,7 @@
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" name="image" id="file-upload" aria-describedby="inputGroupFileAddon01" accept=".jpg,.png">
                   <label class="custom-file-label" for="file-upload" id="file-upload-filename">Choose file</label>
-                  <small class="form-text text-muted">รองรับ ไฟล์ .pdf / .jpg เท่านั้น ขนาดไม่เกิน 10 MB / ไฟล์.</small>
+                  <small class="form-text text-muted">รองรับ ไฟล์ .png / .jpg เท่านั้น ขนาดไม่เกิน 10 MB / ไฟล์.</small>
                 </div>
               </div>
             </div>
