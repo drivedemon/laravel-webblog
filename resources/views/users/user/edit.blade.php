@@ -17,7 +17,7 @@
           <b>แก้ไขข้อมูล</b> คุณ {{$user->name}}
         </div>
         <div class="card-body">
-          <form action="" method="post" enctype="multipart/form-data">
+          <form action="{{route('users.update', $user->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             @if(isset($user))
             @method('put')
@@ -33,7 +33,7 @@
               <label for="" class="col-md-2 col-form-label"></label>
               <label for="" class="col-md-2 col-form-label">Email <span style="color:red;">*</span></label>
               <div class="col-md-5">
-                <input type="email" class="form-control" name="" value="{{isset($user)?$user->email:''}}" readonly>
+                <input type="email" class="form-control" name="email" value="{{isset($user)?$user->email:''}}" readonly>
               </div>
             </div>
             <div class="form-group row">

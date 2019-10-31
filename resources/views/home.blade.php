@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    @if (auth()->user()->isAdmin(auth()->user()->role))
+                    @if (auth()->user()->Dashboard())
                       Welcome!
                     @else
                       Status : Pending for approve

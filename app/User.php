@@ -37,11 +37,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin($role) {
-      if ($role == 'admin') {
+    public function isAdmin() {
+      if ($this->role == 'admin') {
         return $this->role == 'admin';
-      } elseif ($role == 'writer') {
+      } else {
         return 0;
+      }
+    }
+
+    public function Dashboard() {
+      if ($this->role != 'pending') {
+        return 1;
       } else {
         return 0;
       }

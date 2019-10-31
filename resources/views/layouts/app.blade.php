@@ -19,6 +19,7 @@
   <!-- Styles -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dropdown.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
@@ -107,7 +108,7 @@
             <li class="nav-item-cus">
               <a class="nav-link" href="{{route('tags.index')}}">แท็กบทความ</a>
             </li>
-            @if(auth()->user()->isAdmin(auth()->user()->role))
+            @if(auth()->user()->isAdmin())
               <li class="nav-item-cus dropdown">
                 <a class="nav-link dropbtn dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   ตั้งค่าระบบ
@@ -123,7 +124,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="{{route('users.status')}}">พิจารณาคำขอ</a>
-                  <a class="dropdown-item" href="#">ผู้ใช้งาน</a>
+                  <a class="dropdown-item" href="{{route('users.detail')}}">ผู้ใช้งาน</a>
                   <a class="dropdown-item" href="#">ผู้ดูแลระบบ</a>
                 </div>
               </li>

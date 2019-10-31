@@ -11,11 +11,23 @@
 		return "$strDay $strMonthThai $strYear $strHour:$strMinute น.";
 	}
 
-  function convertTypeName($str, $ind) {
+  function convertTypeName($str, $strCheck = null, $ind) {
     if ($ind == 1) {
-      $tname = ($str == 'writer')?'เขียนบทความ':'อ่านบทความ';
+      if ($str == 'writer') {
+        $tname = 'เขียนบทความ';
+      } elseif ($str == 'reader') {
+        $tname = 'อ่านบทความ';
+      } elseif ($str == 'approve') {
+        $tname = ($strCheck == 'writer')?'เขียนบทความ':'อ่านบทความ';
+      } else {
+        $tname = '-';
+      }
     } else {
-      $tname = ($str == 'pending')?'รออุนมัติ':'ไม่อุนมัติ';
+      if ($str == 'pending') {
+        $tname = ($strCheck == 'noapprove')?"<span class='Ndot'></span>&nbsp;&nbsp;ไม่อนุมัติ":"<span class='Pdot'></span>&nbsp;&nbsp;รออนุมัติ";
+      } else {
+      $tname   = ($strCheck == 'approve')?"<span class='Adot'></span>&nbsp;&nbsp;อนุมัติ":"<span class='Pdot'></span>&nbsp;&nbsp;ไม่อนุมัติ";
+      }
     }
     return $tname;
   }

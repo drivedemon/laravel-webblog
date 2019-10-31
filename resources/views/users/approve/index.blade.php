@@ -5,7 +5,7 @@
     <div class="col-md-10">
       <div class="card">
         <div class="card-header">
-          จำนวนรายการทั้งหมด {{$users->total()}} รายการ
+          <b>พิจารณาคำขอ</b> จำนวนรายการทั้งหมด {{$users->total()}} รายการ
         </div>
         <div class="card-body">
           <div class="container">
@@ -17,11 +17,11 @@
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th class="text text-center" width="5%" style="vertical-align: middle;">ลำดับ</th>
+                      <th class="text text-center" width="3%" style="vertical-align: middle;">ลำดับ</th>
                       <th class="text text-center" width="25%" style="vertical-align: middle;">วันที่ยื่นเรื่อง</th>
                       <th class="text text-center" style="vertical-align: middle;">ชื่อ</th>
-                      <th class="text text-center" width="16%">ประเภทที่ต้องการ</th>
-                      <th class="text text-center" width="23%" style="vertical-align: middle;">ดำเนินการ</th>
+                      <th class="text text-center" width="16%">ประเภท</th>
+                      <th class="text text-center" width="22%" style="vertical-align: middle;">ดำเนินการ</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -30,7 +30,7 @@
                       <td class="text-center">{{$rank++}}</td>
                       <td>{{DateThai($user->created_at)}}</td>
                       <td class="text-left">- {{$user->name}}</td>
-                      <td class="text-center">{{convertTypeName($user->role_pending, 1)}}</td>
+                      <td class="text-center">{{convertTypeName($user->role_pending, null, 1)}}</td>
                       <td class="text-center">
                         <form class="delete_form" action="{{route('users.noapprove', $user->id)}}" method="post">
                           @csrf
@@ -87,7 +87,7 @@
                                 <b>ประเภท :</b>
                               </div>
                               <div class="col-md-7">
-                                {{convertTypeName($user->role_pending, 1)}}
+                                {{convertTypeName($user->role_pending, null, 1)}}
                               </div>
                             </div>
                             <div class="form-group row">
@@ -96,7 +96,7 @@
                                 <b>สถานะ :</b>
                               </div>
                               <div class="col-md-7">
-                                {{convertTypeName($user->role, 2)}}
+                                {!!convertTypeName($user->role, null, 2)!!}
                               </div>
                             </div>
                           </div>
