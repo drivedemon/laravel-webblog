@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                   จำนวนรายการทั้งหมด {{$posts->total()}} รายการ
-                  <a href="{{route('posts.create')}}" class="btn btn-success btn-sm float-md-right ">เพิ่มบทความ</a>
+                  <a href="{{route('posts.create')}}" class="btn btn-success btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มบทความ</a>
                 </div>
                 <div class="card-body">
 

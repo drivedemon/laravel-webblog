@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                   จำนวนรายการทั้งหมด {{$tags->total()}} รายการ
-                  <a href="{{route('tags.create')}}" class="btn btn-success btn-sm float-md-right ">เพิ่มแท็ก</a>
+                  <a href="{{route('tags.create')}}" class="btn btn-success btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มแท็ก</a>
                 </div>
                 <div class="card-body">
 
