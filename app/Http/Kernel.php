@@ -5,6 +5,7 @@ namespace App\Http;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use App\Http\Middleware\VerifyCategory;
 use App\Http\Middleware\VerifyIsAdmin;
+use App\Http\Middleware\VerifymyPost;
 use App\Http\Middleware\checkRole;
 
 class Kernel extends HttpKernel
@@ -66,6 +67,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'verifyCategory' => VerifyCategory::class,
         'admin' => VerifyIsAdmin::class,
+        'mypost' => VerifymyPost::class,
         'checkrole' => checkRole::class,
     ];
 

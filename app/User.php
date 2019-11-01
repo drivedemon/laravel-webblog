@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Post;
 
 class User extends Authenticatable
 {
@@ -47,6 +48,14 @@ class User extends Authenticatable
 
     public function Dashboard() {
       if ($this->role != 'pending') {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
+
+    public function Permission() {
+      if ($this->role == 'admin') {
         return 1;
       } else {
         return 0;

@@ -13,52 +13,51 @@
               <div class="col-md-1">
               </div>
               <div class="col-md-10">
-
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th class="text text-center" width="5%" style="vertical-align: middle;">ลำดับ</th>
-                      <th class="text text-center" style="vertical-align: middle;">ชื่อ</th>
-                      <th class="text text-center" width="16%">ประเภท</th>
-                      <th class="text text-center" width="15%" style="vertical-align: middle;">สถานะ</th>
-                      <th class="text text-center" width="17%" style="vertical-align: middle;">ดำเนินการ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach($users as $key => $user)
-                    <tr>
-                      <td class="text-center">{{$rank++}}</td>
-                      <td class="text-left">- {{$user->name}}</td>
-                      <td class="text-center">{{convertTypeName($user->role_pending, $user->role, 1)}}</td>
-                      <td>{!!convertTypeName($user->role, $user->role_pending, 2)!!}</td>
-                      <td class="text-center">
-                        <form class="delete_form" action="{{route('users.delete', $user->id)}}" method="post">
-                          @csrf
-                          <input type="hidden" name="_method" value="DELETE">
-                          <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm" title="แก้ไขข้อมูลผู้ใช้งาน">แก้ไข</a>
-                          &nbsp;
-                          <input type="submit" name="" value="ลบ" title="ลบผู้ใช้งาน" class="btn btn-danger btn-sm">
-                        </form>
-                      </td>
-                    </tr>
-
-                    @endforeach
-                  </tbody>
-                </table>
-
-                <!-- <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th>คำขอ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <th class="text-center">
-                      ไม่มีคำขอ
-                    </th>
-                  </tbody>
-                </table> -->
-
+                @if ($users->count() > 0)
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                        <th class="text text-center" width="5%" style="vertical-align: middle;">ลำดับ</th>
+                        <th class="text text-center" style="vertical-align: middle;">ชื่อ</th>
+                        <th class="text text-center" width="16%">ประเภท</th>
+                        <th class="text text-center" width="15%" style="vertical-align: middle;">สถานะ</th>
+                        <th class="text text-center" width="17%" style="vertical-align: middle;">ดำเนินการ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($users as $key => $user)
+                      <tr>
+                        <td class="text-center">{{$rank++}}</td>
+                        <td class="text-left">- {{$user->name}}</td>
+                        <td class="text-center">{{convertTypeName($user->role_pending, $user->role, 1)}}</td>
+                        <td>{!!convertTypeName($user->role, $user->role_pending, 2)!!}</td>
+                        <td class="text-center">
+                          <form class="delete_form" action="{{route('users.delete', $user->id)}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="DELETE">
+                            <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm" title="แก้ไขข้อมูลผู้ใช้งาน">แก้ไข</a>
+                            &nbsp;
+                            <input type="submit" name="" value="ลบ" title="ลบผู้ใช้งาน" class="btn btn-danger btn-sm">
+                          </form>
+                        </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
+                @else
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                        <th>คำขอ</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <th class="text-center">
+                        ไม่มีข้อมูล
+                      </th>
+                    </tbody>
+                  </table>
+                @endif
               </div>
               <div class="col-md-1">
               </div>

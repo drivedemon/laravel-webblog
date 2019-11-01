@@ -125,7 +125,7 @@
                 <div class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="{{route('users.status')}}">พิจารณาคำขอ</a>
                   <a class="dropdown-item" href="{{route('users.detail')}}">ผู้ใช้งาน</a>
-                  <a class="dropdown-item" href="#">ผู้ดูแลระบบ</a>
+                  <a class="dropdown-item" href="{{route('admin.index')}}">ผู้ดูแลระบบ</a>
                 </div>
               </li>
             @else

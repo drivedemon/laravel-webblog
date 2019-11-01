@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    
                     @if (auth()->user()->Dashboard())
                       Welcome!
                     @else

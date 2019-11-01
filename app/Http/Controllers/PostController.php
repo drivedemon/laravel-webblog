@@ -7,6 +7,7 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use App\Http\Middleware\VerifyCategory;
+use App\Http\Middleware\VerifymyPost;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -19,12 +20,19 @@ class PostController extends Controller
   */
   public function __construct() {
     $this->middleware('verifyCategory')->only(['index', 'create', 'store']);
+    $this->middleware('mypost')->only('edit');
   }
 
 
   public function index()
   {
-    return view('posts.index')->with('posts', Post::orderBy('title', 'asc')->paginate(10));
+    if (auth()->user()->Permission()) {
+      $results = Post::orderBy('title', 'asc')->paginate(10);
+    } else {
+      $results = Post::where('user_id', auth()->user()->id)->orderBy('title', 'asc')->paginate(10);
+    }
+    session()->push('flag', '0');
+    return view('posts.index')->with('posts', $results);
   }
 
   /**

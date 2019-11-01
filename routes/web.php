@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function() {
       Route::get('users/edit/{user}', 'UserController@edit')->name('users.edit');
       Route::put('users/update/{user}', 'UserController@update')->name('users.update');
       Route::delete('users/delete/{user}', 'UserController@destroy')->name('users.delete');
+      // detail admin
+      Route::resource('admin', 'MakeAdminController');
     });
   });
   Route::get('/home', 'HomeController@index')->name('home');
