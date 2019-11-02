@@ -12,7 +12,7 @@
             @csrf
 
             <div class="form-group row">
-              <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+              <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name - Surname') }}</label>
 
               <div class="col-md-6">
                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -69,7 +69,6 @@
                   <label><input type="radio" name="role" value="writer" checked> Writer </label>&emsp;
                   <label><input type="radio" name="role" value="reader"> Reader </label>
                 </div>
-                <!-- <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password"> -->
               </div>
             </div>
 

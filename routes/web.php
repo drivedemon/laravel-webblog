@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('auth')->group(function() {
-  Route::middleware('checkrole')->group(function() {
+  Route::middleware('checkrole', 'checkapprove')->group(function() {
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
     Route::resource('tags', 'TagController');

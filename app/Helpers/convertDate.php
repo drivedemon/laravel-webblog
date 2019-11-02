@@ -31,4 +31,8 @@
     }
     return $tname;
   }
-?>
+
+  function typeAdmin($str) {
+    $str = ($str == 'admin')?"<span class='Adot'></span>&nbsp;&nbsp;ใช้งาน":"<span class='Ndot'></span>&nbsp;&nbsp;ไม่ใช้งาน";
+    return $str;
+  }

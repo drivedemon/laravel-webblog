@@ -13,9 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
+
                     @if (auth()->user()->Dashboard())
-                      Welcome!
+                      Welcome.
                     @else
                       Status : Pending for approve
                     @endif

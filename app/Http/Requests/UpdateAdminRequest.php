@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAdminRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,10 @@ class CreateAdminRequest extends FormRequest
     {
         return [
           'name' => ['required', 'string', 'max:50'],
-          'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+          'email' => ['required', 'string', 'email'],
           'password' => ['required', 'string', 'min:1', 'confirmed'],
+          'role' => ['required'],
+          'status' => ['required'],
         ];
     }
 
@@ -37,7 +39,8 @@ class CreateAdminRequest extends FormRequest
           'name.required' => 'กรุณากรอกข้อมูล ชื่อ-นามสกุล',
           'email.required' => 'กรุณากรอกข้อมูล Email',
           'password.required' => 'กรุณากรอกข้อมูล รหัสผ่าน',
-          'unique' => 'ห้ามกรอกข้อมูลซ้ำ',
+          'role.required' => 'กรุณาเลือกประเภท',
+          'status.required' => 'กรุณาเลือกสถานะ',
           'confirmed' => 'รหัสผ่านไม่ตรงกัน',
           'max' => 'จำนวนตัวอักษรเกิน 50 ตัว',
           'min' => 'จำนวนตัวอักษรอย่างน้อย 1 ตัว'

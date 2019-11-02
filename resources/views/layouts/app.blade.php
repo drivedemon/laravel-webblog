@@ -69,10 +69,6 @@
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                <a class="dropdown-item" href="#">
-                  Edit Profile
-                </a>
-
                 <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">
@@ -98,7 +94,7 @@
           <li class="nav-item-cus">
             <a class="nav-link" href="{{ url('/home') }}">หน้าแรก <span class="sr-only">(current)</span></a>
           </li>
-          @if(auth()->user()->role != 'pending' && auth()->user()->role != 'reader')
+          @if(auth()->user()->checkStatus())
             <li class="nav-item-cus">
               <a class="nav-link" href="{{route('posts.index')}}">บทความ</a>
             </li>

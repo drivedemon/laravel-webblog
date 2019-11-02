@@ -61,4 +61,16 @@ class User extends Authenticatable
         return 0;
       }
     }
+
+    public function checkStatus() {
+      if ($this->role != 'pending' && $this->role != 'reader') {
+        if ($this->role_pending == 'noapprove') {
+          return 0;
+        } else {
+          return 1;
+        }
+      } else {
+        return 0;
+      }
+    }
 }

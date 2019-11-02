@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\CreateAdminRequest;
+use App\Http\Requests\UpdateAdminRequest;
 
 class MakeAdminController extends Controller
 {
@@ -13,7 +17,9 @@ class MakeAdminController extends Controller
      */
     public function index()
     {
-      return view('admin.index');
+      $results = User::where('role', 'admin')->orderBy('name', 'asc')->paginate(10);
+      $rank = $results->firstItem();
+      return view('admin.index', ['admins' => $results, 'rank' => $rank]);
     }
 
     /**
@@ -23,7 +29,7 @@ class MakeAdminController extends Controller
      */
     public function create()
     {
-        //
+      return view('admin.create');
     }
 
     /**
@@ -32,9 +38,23 @@ class MakeAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateAdminRequest $request)
     {
-        //
+      if ($request->flag) {
+        User::create([
+            'name' => $request->name,
+            'role' => 'admin',
+            'role_pending' => 'admin',
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        Session()->flash('success', 'บันทึกข้อมูลเรียบร้อย');
+        return redirect(route('admin.index'));
+      } else {
+        Session()->flash('error', 'กรุณาเข้าถึงให้ถูกวิธี');
+        return back();
+      }
     }
 
     /**
@@ -54,9 +74,9 @@ class MakeAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $admin)
     {
-        //
+      return view('admin.create')->with('admin', $admin);
     }
 
     /**
@@ -66,9 +86,29 @@ class MakeAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAdminRequest $request, User $admin)
     {
-        //
+      if ($request->flag) {
+        if (Hash::check($request->password, $admin->password)) {
+          $data = $request->only(['name']);
+          if ($request->status == 'approve') {
+            $data['role'] = $request->role;
+            $data['role_pending'] = ($request->role == 'admin')?'admin':'approve';
+          } else {
+            $data['role_pending'] = 'noapprove';
+          }
+        } else {
+          Session()->flash('error', 'รหัสผ่านไม่ถูกต้อง');
+          return back();
+        }
+      } else {
+        Session()->flash('error', 'กรุณาเข้าถึงให้ถูกวิธี');
+        return back();
+      }
+
+      $admin->update($data);
+      Session()->flash('success', 'อัปเดตข้อมูลเรียบร้อย');
+      return redirect(route('admin.index'));
     }
 
     /**
@@ -77,7 +117,7 @@ class MakeAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $admin)
     {
         //
     }

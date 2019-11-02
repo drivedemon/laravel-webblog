@@ -5,8 +5,8 @@
     <div class="col-md-10">
       <div class="card">
         <div class="card-header">
-          <b>พิจารณาคำขอ</b> จำนวนรายการทั้งหมด  รายการ
-          <a href="{{route('admin.create')}}" class="btn btn-primary btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มผู้ดูแลระบบ</a>
+          <b>ตั้งค่าผู้ดูแลระบบ</b> จำนวนรายการทั้งหมด {{$admins->total()}} รายการ
+          <a href="{{route('admin.create')}}" class="btn btn-success btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มผู้ดูแลระบบ</a>
         </div>
         <div class="card-body">
           <div class="container">
@@ -14,59 +14,43 @@
               <div class="col-md-1">
               </div>
               <div class="col-md-10">
-
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
                       <th class="text text-center" width="3%" style="vertical-align: middle;">ลำดับ</th>
-                      <th class="text text-center" width="25%" style="vertical-align: middle;">วันที่ยื่นเรื่อง</th>
                       <th class="text text-center" style="vertical-align: middle;">ชื่อ</th>
-                      <th class="text text-center" width="16%">ประเภท</th>
-                      <th class="text text-center" width="22%" style="vertical-align: middle;">ดำเนินการ</th>
+                      <th class="text text-center" width="16%">สถานะ</th>
+                      <th class="text text-center" width="17%" style="vertical-align: middle;">ดำเนินการ</th>
                     </tr>
                   </thead>
                   <tbody>
-
+                    @foreach($admins as $admin)
                     <tr>
-                      <td class="text-center"></td>
-                      <td></td>
-                      <td class="text-left">-</td>
-                      <td class="text-center"></td>
+                      <td class="text-center">{{$rank++}}</td>
+                      <td class="text-left">- {{$admin->name}}</td>
+                      <td class="text-left"> &nbsp;{!!typeAdmin($admin->role_pending)!!} </td>
                       <td class="text-center">
-                        <form class="delete_form" action="" method="post">
+                        <form class="delete_form" action="{{route('admin.destroy', $admin->id)}}" method="post">
                           @csrf
                           @method('put')
-                          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalapprove">
-                            อนุมัติ
-                          </button>
+                          <a href="{{route('admin.edit', $admin->id)}}" class="btn btn-primary btn-sm">แก้ไข</a>
                           &nbsp;
-                          <input type="submit" name="" value="ไม่อนุมัติ" class="btn btn-danger btn-sm">
+                          @if (auth()->user()->id != $admin->id)
+                          <input type="submit" name="" value="ลบ" class="btn btn-danger btn-sm">
+                          @endif
                         </form>
                       </td>
                     </tr>
+                    @endforeach
                   </tbody>
                 </table>
-
-                <!-- <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th>คำขอ</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <th class="text-center">
-                      ไม่มีคำขอ
-                    </th>
-                  </tbody>
-                </table> -->
-
               </div>
               <div class="col-md-1">
               </div>
               <div class="col-md-1">
               </div>
               <div class="col-md-11">
-
+                {{$admins->links()}}
               </div>
             </div>
           </div>
@@ -79,7 +63,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
   $('.delete_form').on('submit', function() {
-    if (confirm('ไม่อนุมัติผู้ใช้งานใช่ไหม')) {
+    if (confirm('ต้องการลบผู้ดูแลระบบใช่ไหม')) {
       return true;
     } else {
       return false;

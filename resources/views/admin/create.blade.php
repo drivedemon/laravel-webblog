@@ -34,17 +34,38 @@
               <label for="" class="col-md-1 col-form-label"></label>
               <label for="" class="col-md-2 col-form-label text-md-right">E-mail <span style="color:red;">*</span></label>
               <div class="col-md-6">
-                <input type="email" class="form-control" name="email" value="{{isset($admin)?$admin->email:''}}" readonly>
+                <input type="email" class="form-control" name="email" value="{{isset($admin)?$admin->email:''}}" {{isset($admin)?'readonly':''}}>
               </div>
             </div>
+            @if (!isset($admin))
+              <div class="form-group row">
+                <label for="" class="col-md-1 col-form-label"></label>
+                <label for="" class="col-md-2 col-form-label text-md-right">รหัสผ่าน <span style="color:red;">*</span></label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" name="password" value="">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="" class="col-md-1 col-form-label"></label>
+                <label for="" class="col-md-2 col-form-label text-md-right">ยืนยันรหัสผ่าน <span style="color:red;">*</span></label>
+                <div class="col-md-6">
+                  <input type="password" class="form-control" name="password_confirmation" value="">
+                </div>
+              </div>
+              <div class="form-group text-center">
+                <input type="submit" name="" value="Submit" class="btn btn-success">
+              </div>
+            @else
             <div class="form-group row">
               <label for="" class="col-md-1 col-form-label"></label>
               <label for="" class="col-md-2 col-form-label text-md-right">ประเภท <span style="color:red;">*</span></label>
               <div class="col-md-6">
                 <div class="radio" style="padding-top: 10px;">
                   <label><input type="radio" name="role" value="admin"
-                    @if ($admin->role == 'admin')
-                      checked
+                    @if (isset($admin))
+                      @if ($admin->role == 'admin')
+                        checked
+                      @endif
                     @endif
                     > Admin </label>&emsp;
                   <label><input type="radio" name="role" value="writer"
@@ -59,22 +80,61 @@
               <label for="" class="col-md-2 col-form-label text-md-right">สถานะ <span style="color:red;">*</span></label>
               <div class="col-md-6">
                 <div class="radio" style="padding-top: 10px;">
-                  <label><input type="radio" name="role_pick" value="approve"
-                    @if ($admin->role_pending == 'admin')
-                      checked
+                  <label><input type="radio" name="status" value="approve"
+                    @if (isset($admin))
+                      @if ($admin->role_pending == 'admin')
+                        checked
+                      @endif
                     @endif
                     > ใช้งาน </label>&emsp;
-                  <label><input type="radio" name="role_pick" value="noapprove"
-                    @if ($admin->role_pending == 'noapprove')
-                      checked
+                  <label><input type="radio" name="status" value="noapprove"
+                    @if (isset($admin))
+                      @if ($admin->role_pending == 'noapprove')
+                        checked
+                      @endif
                     @endif
                     > ไม่ใช้งาน </label>
                 </div>
               </div>
             </div>
             <div class="form-group text-center">
-              <input type="submit" name="" value="Submit" class="btn btn-success">
+              <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#Modalapprove">
+                Submit
+              </button>
             </div>
+            <!-- Modal -->
+            <div class="modal fade" id="Modalapprove" tabindex="-1" role="dialog" aria-labelledby="Modalapprove" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="Modalapprove">กรุณาใส่รหัสผ่านเพื่อยืนยัน</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group row">
+                      <label for="" class="col-md-1 col-form-label"></label>
+                      <label for="" class="col-md-3 col-form-label text-md-right">รหัสผ่าน <span style="color:red;">*</span></label>
+                      <div class="col-md-6">
+                        <input type="password" class="form-control" name="password" value="">
+                      </div>
+                    </div>
+                      <div class="form-group row">
+                        <label for="" class="col-md-1 col-form-label"></label>
+                        <label for="" class="col-md-3 col-form-label text-md-right">ยืนยันรหัสผ่าน <span style="color:red;">*</span></label>
+                        <div class="col-md-6">
+                          <input type="password" class="form-control" name="password_confirmation" value="">
+                        </div>
+                      </div>
+                  <div class="modal-footer">
+                      <input type="submit" name="" value="Confirm" class="btn btn-success">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endif
           </form>
         </div>
       </div>

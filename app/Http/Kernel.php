@@ -7,6 +7,7 @@ use App\Http\Middleware\VerifyCategory;
 use App\Http\Middleware\VerifyIsAdmin;
 use App\Http\Middleware\VerifymyPost;
 use App\Http\Middleware\checkRole;
+use App\Http\Middleware\checkApprove;
 
 class Kernel extends HttpKernel
 {
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'admin' => VerifyIsAdmin::class,
         'mypost' => VerifymyPost::class,
         'checkrole' => checkRole::class,
+        'checkapprove' => checkApprove::class,
     ];
 
     /**

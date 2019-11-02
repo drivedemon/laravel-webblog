@@ -16,6 +16,7 @@ class VerifyIsAdmin
     public function handle($request, Closure $next)
     {
       if (!auth()->user()->isAdmin()) {
+        Session()->flash('error', 'ไม่มีสิทธิ์การเข้าถึง');
         return redirect(route('home'));
       }
         return $next($request);
