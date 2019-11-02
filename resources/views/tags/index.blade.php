@@ -9,8 +9,6 @@
                   <a href="{{route('tags.create')}}" class="btn btn-success btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มแท็ก</a>
                 </div>
                 <div class="card-body">
-
-
                     <div class="container">
                       <div class="row">
                         <div class="col-md-1">
@@ -69,23 +67,10 @@
                         </div>
                       </div>
                     </div>
-
-
                 </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.delete_form').on('submit', function() {
-      if (confirm('ต้องการลบข้อมูลใช่ไหม')) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-  })
-</script>
 @endsection

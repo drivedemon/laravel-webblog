@@ -32,7 +32,7 @@
                         <td class="text-center">{{convertTypeName($user->role_pending, $user->role, 1)}}</td>
                         <td>{!!convertTypeName($user->role, $user->role_pending, 2)!!}</td>
                         <td class="text-center">
-                          <form class="delete_form" action="{{route('users.delete', $user->id)}}" method="post">
+                          <form class="deleteuser_form" action="{{route('users.delete', $user->id)}}" method="post">
                             @csrf
                             <input type="hidden" name="_method" value="DELETE">
                             <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm" title="แก้ไขข้อมูลผู้ใช้งาน">แก้ไข</a>
@@ -76,7 +76,7 @@
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
-  $('.delete_form').on('submit', function() {
+  $('.deleteuser_form').on('submit', function() {
     if (confirm('ต้องการลบผู้ใช้งานใช่ไหม\nหากลบแล้วข้อมูลผู้ใช้งานท่านนี้จะหายไปจากระบบทันที !!')) {
       return true;
     } else {

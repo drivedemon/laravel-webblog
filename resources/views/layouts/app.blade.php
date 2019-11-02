@@ -85,8 +85,8 @@
       </div>
     </div>
   </nav>
-  @auth
 
+  @auth
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <div class="collapse navbar-collapse " id="navbarNavDropdown">
@@ -156,4 +156,15 @@
   </main>
 </div>
 </body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.delete_form').on('submit', function() {
+      if (confirm('ต้องการลบข้อมูลใช่ไหม')) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+  })
+</script>
 </html>
