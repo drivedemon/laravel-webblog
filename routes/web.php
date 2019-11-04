@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
     Route::resource('tags', 'TagController');
+    Route::get('/action', 'SearchController@action')->name('search.action');
 
     Route::middleware('admin')->group(function() {
       // admin approve

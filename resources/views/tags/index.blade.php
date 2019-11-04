@@ -5,16 +5,17 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                  จำนวนรายการทั้งหมด {{$tags->total()}} รายการ
+                  จำนวนรายการทั้งหมด <span id="total"></span> รายการ
                   <a href="{{route('tags.create')}}" class="btn btn-success btn-sm float-md-right "><i class="fa fa-plus"></i> &nbsp;เพิ่มแท็ก</a>
                 </div>
                 <div class="card-body">
                     <div class="container">
-                      <div class="row">
+                      @include('ajax.search')
+                      <div class="form-group row">
                         <div class="col-md-1">
                         </div>
                         <div class="col-md-10">
-                          @if($tags->count() > 0)
+
                           <table class="table table-bordered table-hover">
                             <thead>
                               <tr style="background-color: #efefef; height: 50px; color: #555555;">
@@ -25,45 +26,12 @@
                               </tr>
                             </thead>
                             <tbody>
-                              @foreach($tags->all() as $tag)
-                                <tr>
-                                  <td>&emsp;{{$tag->name}}</td>
-                                  <td class="text-center">{{$tag->post->count()}}</td>
-                                  <td class="text-center">
-                                    <a href="{{route('tags.edit', $tag->id)}}" class="btn btn-info btn-sm">แก้ไข</a>
-                                  </td>
-                                  <td class="text-center">
-                                    <form class="delete_form" action="{{route('tags.destroy', $tag->id)}}" method="post">
-                                      @csrf
-                                      <input type="hidden" name="_method" value="DELETE">
-                                      <input type="submit" name="" value="ลบ" class="btn btn-danger btn-sm">
-                                    </form>
-                                  </td>
-                                </tr>
-                              @endforeach
                             </tbody>
                           </table>
-                          @else
-                          <table class="table table-bordered table-hover">
-                            <thead>
-                              <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                                <th>แท็ก</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <th class="text-center">
-                                ไม่มีแท็ก
-                              </th>
-                            </tbody>
-                              </table>
-                          @endif
                         </div>
                         <div class="col-md-1">
                         </div>
-                        <div class="col-md-1">
-                        </div>
-                        <div class="col-md-11">
-                          {{$tags->links()}}
+                        <div class="col-md-12">
                         </div>
                       </div>
                     </div>

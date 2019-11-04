@@ -156,15 +156,4 @@
   </main>
 </div>
 </body>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.delete_form').on('submit', function() {
-      if (confirm('ต้องการลบข้อมูลใช่ไหม')) {
-        return true;
-      } else {
-        return false;
-      }
-    })
-  })
-</script>
 </html>
