@@ -26,13 +26,8 @@ class PostController extends Controller
 
   public function index()
   {
-    if (auth()->user()->Permission()) {
-      $results = Post::orderBy('title', 'asc')->paginate(10);
-    } else {
-      $results = Post::where('user_id', auth()->user()->id)->orderBy('title', 'asc')->paginate(10);
-    }
     session()->push('flag', '0');
-    return view('posts.index')->with('posts', $results);
+    return view('posts.index');
   }
 
   /**

@@ -2,7 +2,7 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-10">
-    <input type="text" class="form-control" id="search" name="search" placeholder="ค้นหาข้อมูล">
+    <input type="text" class="form-control" id="search" name="search" placeholder="&#xf002; ค้นหาข้อมูล">
   </div>
   <div class="col-md-1">
   </div>
@@ -34,7 +34,6 @@
       success: function(data) {
         $('tbody').html(data.table_data)
         $('#total').text(data.total_data)
-        console.log(data.total_data)
       }
     })
   }
