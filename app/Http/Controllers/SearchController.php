@@ -11,6 +11,7 @@ class SearchController extends Controller
     DB::enableQueryLog();
     if ($request->ajax()) {
       $output = '';
+      $flagNdata = '';
       $path = url()->previous();
       $result = $request->get('query');
       if ($result) {
@@ -24,7 +25,7 @@ class SearchController extends Controller
           ->groupBy('tags.id', 'tags.name')
           ->where('tags.name', 'like', '%'.$result.'%')
           ->orderBy('tags.name', 'asc')
-          ->get();
+          ->paginate(8);
         } elseif (strpos($path, 'categories') !== false) {
           $param = 'category';
           $param_e = 'categories.edit';
@@ -96,6 +97,7 @@ class SearchController extends Controller
             ->get();
           }
         }
+      }
       $total = $data->count();
       if ($total > 0) {
         if ($param == 'post') {
@@ -131,8 +133,6 @@ class SearchController extends Controller
             </tr>';
           }
         }
-      } else {
-        $output = "<tr><td align='center' colspan='5'>ไม่พบข้อมูล</td></tr>";
       }
       $datanew = array('table_data' => $output, 'total_data' => $total);
       $json = json_encode($datanew);

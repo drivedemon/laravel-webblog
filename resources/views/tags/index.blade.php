@@ -26,12 +26,16 @@
                               </tr>
                             </thead>
                             <tbody>
+                              <div id="result"></div>
                             </tbody>
                           </table>
                         </div>
                         <div class="col-md-1">
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 text-center">
+                          <div class="loading">
+                            <img src="https://media1.giphy.com/media/y1ZBcOGOOtlpC/200.gif" width="90px">
+                          </div>
                         </div>
                       </div>
                     </div>
