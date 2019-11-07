@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
+use Illuminate\Support\Facades\Input;
 use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
@@ -33,6 +35,64 @@ class UserController extends Controller
     $results = User::where('role', '!=', 'admin')->orderBy('name', 'asc')->paginate(10);
     $rank = $results->firstItem();
     return view('users.user.index', ['users' => $results, 'rank' => $rank]);
+  }
+
+  public function search(Request $request) {
+    $name = $request->name?$request->name:'';
+    $type = $request->type?$request->type:'';
+    $status = $request->status?$request->status:'';
+    if ($status == 'pending') {
+      $type1 = 'pending';
+      if ($type != '') {
+        $results = User::where([
+          ['role', '!=', 'admin'],
+          ['name', 'like', '%'.$name.'%'],
+          ['role', 'like', '%'.$type1.'%'],
+          ['role_pending', '=', $type],
+          ])
+          ->orderBy('name', 'asc')->paginate(10);
+      } else {
+        $results = User::where([
+          ['role', '!=', 'admin'],
+          ['name', 'like', '%'.$name.'%'],
+          ['role', 'like', '%'.$type1.'%'],
+          ['role_pending', '!=', 'noapprove'],
+          ])
+          ->orderBy('name', 'asc')->paginate(10);
+      }
+    } elseif ($status == 'approve') {
+      $results = User::where([
+        ['role', '!=', 'admin'],
+        ['name', 'like', '%'.$name.'%'],
+        ['role', 'like', '%'.$type.'%'],
+        ['role_pending', '=', $status],
+        ])
+        ->orderBy('name', 'asc')->paginate(10);
+    } else {
+      if ($type != '' && $status == '') {
+        $results = User::where([
+          ['role', '!=', 'admin'],
+          ['name', 'like', '%'.$name.'%'],
+          ['role', 'like', '%'.$type.'%'],
+          ])
+          ->orWhere([
+            ['role', '!=', 'admin'],
+            ['name', 'like', '%'.$name.'%'],
+            ['role_pending', 'like', '%'.$type.'%'],
+            ])
+          ->orderBy('name', 'asc')->paginate(10);
+      } else {
+        $results = User::where([
+          ['role', '!=', 'admin'],
+          ['name', 'like', '%'.$name.'%'],
+          ['role', 'like', '%'.$type.'%'],
+          ['role_pending', 'like', '%'.$status.'%'],
+          ])
+          ->orderBy('name', 'asc')->paginate(10);
+      }
+    }
+    $rank = $results->firstItem();
+    return view('users.user.index', ['users' => $results, 'rank' => $rank, 'sname' => $name, 'stype' => $type, 's_status' => $status]);
   }
 
   public function edit(User $user) {

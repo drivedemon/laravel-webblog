@@ -26,6 +26,7 @@ class SearchController extends Controller
             ->where('tags.name', 'like', '%'.$result.'%')
             ->orderBy('tags.name', 'asc')
             ->paginate(10);
+          $total = $data->total();
         } elseif (strpos($path, 'categories') !== false) {
           $param = 'category';
           $param_e = 'categories.edit';
@@ -37,24 +38,27 @@ class SearchController extends Controller
             ->groupBy('categories.id', 'categories.name')
             ->orderBy('count_data', 'desc')
             ->paginate(10);
+          $total = $data->total();
         } elseif (strpos($path, 'posts') !== false) {
           $param = 'post';
           $param_e = 'posts.edit';
           $param_d = 'posts.destroy';
           if (auth()->user()->Permission()) {
             $data = DB::table('posts')
-            ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')
-            ->where('title', 'like', '%'.$result.'%')
-            ->orderBy('posts.title', 'asc')
-            ->paginate(10);
+              ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
+              ->select('posts.*', 'categories.name')
+              ->where('title', 'like', '%'.$result.'%')
+              ->orderBy('posts.title', 'asc')
+              ->paginate(10);
+            $total = $data->total();
           } else {
             $data = DB::table('posts')
-            ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
-            ->select('posts.*', 'categories.name')
-            ->where([['title', 'like', '%'.$result.'%'], ['user_id', auth()->user()->id],])
-            ->orderBy('posts.title', 'asc')
-            ->paginate(10);
+              ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
+              ->select('posts.*', 'categories.name')
+              ->where([['title', 'like', '%'.$result.'%'], ['user_id', auth()->user()->id],])
+              ->orderBy('posts.title', 'asc')
+              ->paginate(10);
+            $total = $data->total();
           }
         }
       } else {
@@ -68,6 +72,7 @@ class SearchController extends Controller
             ->groupBy('tags.id', 'tags.name')
             ->orderBy('count_data', 'desc')
             ->get();
+          $total = $data->count();
         } elseif (strpos($path, 'categories') !== false) {
           $param = 'category';
           $param_e = 'categories.edit';
@@ -78,6 +83,7 @@ class SearchController extends Controller
             ->groupBy('categories.id', 'categories.name')
             ->orderBy('count_data', 'desc')
             ->get();
+          $total = $data->count();
         } elseif (strpos($path, 'posts') !== false) {
           $param = 'post';
           $param_e = 'posts.edit';
@@ -88,6 +94,7 @@ class SearchController extends Controller
             ->select('posts.*', 'categories.name')
             ->orderBy('posts.title', 'asc')
             ->get();
+            $total = $data->count();
           } else {
             $data = DB::table('posts')
             ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
@@ -95,10 +102,10 @@ class SearchController extends Controller
             ->where('user_id', auth()->user()->id)
             ->orderBy('posts.title', 'asc')
             ->get();
+            $total = $data->count();
           }
         }
       }
-      $total = $data->count();
       if ($total > 0) {
         if ($param == 'post') {
           foreach ($data as $value) {

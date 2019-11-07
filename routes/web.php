@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function() {
       Route::put('users/noapprove/{user}', 'UserController@noapprove')->name('users.noapprove');
       // check staus user
       Route::get('users/detail', 'UserController@detailIndex')->name('users.detail');
+      Route::get('users/details', 'UserController@search')->name('users.search');
       Route::get('users/edit/{user}', 'UserController@edit')->name('users.edit');
       Route::put('users/update/{user}', 'UserController@update')->name('users.update');
       Route::delete('users/delete/{user}', 'UserController@destroy')->name('users.delete');
