@@ -20,23 +20,23 @@ class SearchController extends Controller
           $param_e = 'tags.edit';
           $param_d = 'tags.destroy';
           $data = DB::table('tags')
-          ->leftJoin('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-          ->select('tags.id', 'tags.name', DB::raw('COUNT(post_tag.tag_id) as count_data'))
-          ->groupBy('tags.id', 'tags.name')
-          ->where('tags.name', 'like', '%'.$result.'%')
-          ->orderBy('tags.name', 'asc')
-          ->paginate(8);
+            ->leftJoin('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+            ->select('tags.id', 'tags.name', DB::raw('COUNT(post_tag.tag_id) as count_data'))
+            ->groupBy('tags.id', 'tags.name')
+            ->where('tags.name', 'like', '%'.$result.'%')
+            ->orderBy('tags.name', 'asc')
+            ->paginate(10);
         } elseif (strpos($path, 'categories') !== false) {
           $param = 'category';
           $param_e = 'categories.edit';
           $param_d = 'categories.destroy';
           $data = DB::table('categories')
-          ->leftJoin('posts', 'categories.id', '=', 'posts.category_id')
-          ->select('categories.id', 'categories.name', DB::raw('COUNT(posts.category_id) as count_data'))
-          ->where('categories.name', 'like', '%'.$result.'%')
-          ->groupBy('categories.id', 'categories.name')
-          ->orderBy('count_data', 'desc')
-          ->get();
+            ->leftJoin('posts', 'categories.id', '=', 'posts.category_id')
+            ->select('categories.id', 'categories.name', DB::raw('COUNT(posts.category_id) as count_data'))
+            ->where('categories.name', 'like', '%'.$result.'%')
+            ->groupBy('categories.id', 'categories.name')
+            ->orderBy('count_data', 'desc')
+            ->paginate(10);
         } elseif (strpos($path, 'posts') !== false) {
           $param = 'post';
           $param_e = 'posts.edit';
@@ -47,14 +47,14 @@ class SearchController extends Controller
             ->select('posts.*', 'categories.name')
             ->where('title', 'like', '%'.$result.'%')
             ->orderBy('posts.title', 'asc')
-            ->get();
+            ->paginate(10);
           } else {
             $data = DB::table('posts')
             ->leftJoin('categories', 'posts.category_id', '=', 'categories.id')
             ->select('posts.*', 'categories.name')
             ->where([['title', 'like', '%'.$result.'%'], ['user_id', auth()->user()->id],])
             ->orderBy('posts.title', 'asc')
-            ->get();
+            ->paginate(10);
           }
         }
       } else {
@@ -63,21 +63,21 @@ class SearchController extends Controller
           $param_e = 'tags.edit';
           $param_d = 'tags.destroy';
           $data = DB::table('tags')
-          ->leftJoin('post_tag', 'tags.id', '=', 'post_tag.tag_id')
-          ->select('tags.id', 'tags.name', DB::raw('COUNT(post_tag.tag_id) as count_data'))
-          ->groupBy('tags.id', 'tags.name')
-          ->orderBy('count_data', 'desc')
-          ->get();
+            ->leftJoin('post_tag', 'tags.id', '=', 'post_tag.tag_id')
+            ->select('tags.id', 'tags.name', DB::raw('COUNT(post_tag.tag_id) as count_data'))
+            ->groupBy('tags.id', 'tags.name')
+            ->orderBy('count_data', 'desc')
+            ->get();
         } elseif (strpos($path, 'categories') !== false) {
           $param = 'category';
           $param_e = 'categories.edit';
           $param_d = 'categories.destroy';
           $data = DB::table('categories')
-          ->leftJoin('posts', 'categories.id', '=', 'posts.category_id')
-          ->select('categories.id', 'categories.name', DB::raw('COUNT(posts.category_id) as count_data'))
-          ->groupBy('categories.id', 'categories.name')
-          ->orderBy('count_data', 'desc')
-          ->get();
+            ->leftJoin('posts', 'categories.id', '=', 'posts.category_id')
+            ->select('categories.id', 'categories.name', DB::raw('COUNT(posts.category_id) as count_data'))
+            ->groupBy('categories.id', 'categories.name')
+            ->orderBy('count_data', 'desc')
+            ->get();
         } elseif (strpos($path, 'posts') !== false) {
           $param = 'post';
           $param_e = 'posts.edit';

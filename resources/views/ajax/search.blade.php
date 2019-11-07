@@ -63,18 +63,5 @@
         $('#total').text(data.total_data)
       }
     })
-
-
-
-      // success: function(data) {
-      //   if (page != '') {
-      //     $('tbody').append(data.table_data)
-      //     $('#total').text(data.total_data)
-      //   } else {
-      //     $('tbody').html(data.table_data)
-      //     $('#total').text(data.total_data)
-      //   }
-      // }
-    // })
   }
 </script>
