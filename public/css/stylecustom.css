@@ -1,0 +1,26 @@
+.Ndot {
+  height: 6px;
+  width: 6px;
+  background-color: #F64D45;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.Pdot {
+  height: 6px;
+  width: 6px;
+  background-color: #F6DB45;
+  border-radius: 50%;
+  display: inline-block;
+}
+.Adot {
+  height: 6px;
+  width: 6px;
+  background-color: #00F939;
+  border-radius: 50%;
+  display: inline-block;
+}
+.btn-block {
+  background-color:#304769;
+  color:#ffffff;
+}
