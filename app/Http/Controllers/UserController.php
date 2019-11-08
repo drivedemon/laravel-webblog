@@ -10,12 +10,27 @@ use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
+  // user self edit profile
+  public function selfEdit() {
+    $id = auth()->user()->id;
+    return view('users.user.selfuser')->with('user', User::where('id', $id)->first());
+  }
+
+  public function selfUpdate(Request $request, User $user) {
+    $request->validate(
+      ['name' => 'required|min:1|max:100'],
+      ['name.required' => 'กรุณากรอกข้อมูล']
+    );
+    $user->update(['name' => $request->name]);
+    Session()->flash('success', 'ดำเนินการเรียบร้อย');
+    return redirect(route('users.status'));
+  }
+
   // approve module
   public function approveIndex() {
     $results = User::where('role', 'pending')->where('role_pending', '!=', 'noapprove')->orderBy('created_at', 'asc')->paginate(10);
     $rank = $results->firstItem();
     return view('users.approve.index', ['users' => $results, 'rank' => $rank]);
-
   }
 
   public function approve(Request $request, User $user) {

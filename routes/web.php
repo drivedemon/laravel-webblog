@@ -22,7 +22,9 @@ Route::middleware('auth')->group(function() {
     Route::resource('categories', 'CategoryController');
     Route::resource('posts', 'PostController');
     Route::resource('tags', 'TagController');
-    Route::get('/action', 'SearchController@action')->name('search.action');
+    Route::get('action', 'SearchController@action')->name('search.action');
+    Route::get('user/edit', 'UserController@selfEdit')->name('user.edit');
+    Route::put('user/update/{user}', 'UserController@selfUpdate')->name('user.update');
 
     Route::middleware('admin')->group(function() {
       // admin approve

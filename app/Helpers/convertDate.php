@@ -26,7 +26,11 @@
       if ($str == 'pending') {
         $tname = ($strCheck == 'noapprove')?"<span class='Ndot'></span>&nbsp;&nbsp;ไม่อนุมัติ":"<span class='Pdot'></span>&nbsp;&nbsp;รออนุมัติ";
       } else {
-      $tname   = ($strCheck == 'approve')?"<span class='Adot'></span>&nbsp;&nbsp;อนุมัติ":"<span class='Pdot'></span>&nbsp;&nbsp;ไม่อนุมัติ";
+        if (auth()->user()->role_pending == 'admin') {
+          $tname = "<span class='Adot'></span>&nbsp;&nbsp;ใช้งาน";
+          return $tname;
+        }
+      $tname = ($strCheck == 'approve')?"<span class='Adot'></span>&nbsp;&nbsp;อนุมัติ":"<span class='Pdot'></span>&nbsp;&nbsp;ไม่อนุมัติ";
       }
     }
     return $tname;
