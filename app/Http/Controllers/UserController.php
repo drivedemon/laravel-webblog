@@ -23,7 +23,7 @@ class UserController extends Controller
     );
     $user->update(['name' => $request->name]);
     Session()->flash('success', 'ดำเนินการเรียบร้อย');
-    return redirect(route('users.status'));
+    return redirect(route('home'));
   }
 
   // approve module

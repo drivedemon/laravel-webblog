@@ -1,16 +1,7 @@
-<!DOCTYPE html>
 @extends('layouts.blog')
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
   @section('title')
     <title>Web-blog</title>
   @endsection
-</head>
-<body>
   @section('header')
     <header class="header text-center text-white" style="background-image: url('../img/bg1.jpg');" data-overlay="7">
       <div class="container">
@@ -30,7 +21,7 @@
         <div class="row">
           <div class="col-md-8 col-xl-9">
             <div class="row gap-y">
-              @foreach ($posts as $post)
+              @forelse ($posts as $post)
               <div class="col-md-6">
                 <div class="card border hover-shadow-6 mb-6 d-block">
                   <a href="{{route('blog.show', $post->id)}}"><img class="card-img-top" src="storage/{{$post->image}}" style="width:100%; height:250px;" alt="Card image cap"></a>
@@ -40,9 +31,11 @@
                   </div>
                 </div>
               </div>
-              @endforeach
+              @empty
+                <p class="text text-center">ไม่พบข้อมูลที่ค้นหา : <strong>{{request()->query('search')}}</strong></p>
+              @endforelse
             </div>
-            {{$posts->links()}}
+            {{$posts->appends(['search'=> request()->query('search')])->links()}}
           </div>
           @include('layouts.sidebar')
         </div>
@@ -50,5 +43,3 @@
     </div>
   </main>
   @endsection
-</body>
-</html>

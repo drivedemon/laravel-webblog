@@ -26,7 +26,7 @@
           {!!$post->content!!}
           <div class="gap-xy-2 mt-6">
             @foreach ($post->tag as $tag)
-              <a class="badge badge-pill badge-secondary" href="#">{{$tag->name}}</a>
+              <a class="badge badge-pill badge-secondary" href="{{route('blog.tag', $tag->id)}}">{{$tag->name}}</a>
             @endforeach
           </div>
 

@@ -26,7 +26,32 @@
           <img class="logo-light" src="{{asset('img/logo-light.png')}}" alt="logo">
         </a>
       </div>
-      <a class="btn btn-xs btn-round btn-success" href="/home">Login</a>
+      @guest
+        <a class="btn btn-xs btn-round btn-success" href="{{route('home')}}">Login</a>
+      @else
+        @if(auth()->user()->isAdmin() == 'admin' || auth()->user()->isAdmin() == 'writer' )
+          <div class="dropdown">
+            <button class="btn btn-xs btn-round btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{auth()->user()->name}}
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="{{route('home')}}">Homepage</a>
+              <a class="dropdown-item" href="{{route('user.edit')}}">Edit profile</a>
+              <a class="dropdown-item" href="{{route('logout')}}"
+              onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+              </form>
+            </div>
+          </div>
+        @else
+            <a class="btn btn-xs btn-round btn-success" href="{{route('logout')}}"
+            onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">Logout</a>
+        @endif
+      @endguest
     </div>
   </nav>
 
