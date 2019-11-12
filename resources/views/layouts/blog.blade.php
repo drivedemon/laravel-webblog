@@ -10,6 +10,7 @@
 
   <link href="{{asset('css/page.css')}}" rel="stylesheet">
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('css/card.css')}}" rel="stylesheet">
 
   <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
   <link rel="icon" href="{{asset('img/favicon.png')}}">
@@ -20,7 +21,6 @@
     <div class="container">
 
       <div class="navbar-left">
-        <button class="navbar-toggler" type="button">&#9776;</button>
         <a class="navbar-brand" href="{{route('welcome')}}">
           <img class="logo-dark" src="{{asset('img/logo-dark.png')}}" alt="logo">
           <img class="logo-light" src="{{asset('img/logo-light.png')}}" alt="logo">

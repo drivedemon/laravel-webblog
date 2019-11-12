@@ -17,6 +17,8 @@
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
   <!-- Styles -->
+  <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
+  <link rel="icon" href="{{asset('img/favicon.png')}}">
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dropdown.css') }}" rel="stylesheet">
   <link href="{{ asset('css/stylecustom.css') }}" rel="stylesheet">
@@ -93,6 +95,9 @@
   @auth
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+      <span class="navbar-toggler-icon"></span>
+    </button>
       <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item-cus">

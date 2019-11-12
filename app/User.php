@@ -42,6 +42,10 @@ class User extends Authenticatable
       return $this->hasMany(Post::class);
     }
 
+    public function post_comment() {
+      return $this->belongsToMany(Post::class)->withTimestamps();
+    }
+
     public function isAdmin() {
       if ($this->role == 'admin') {
         return $this->role == 'admin';

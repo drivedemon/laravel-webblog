@@ -8,6 +8,7 @@
           <div class="row h-100">
             <div class="col-lg-8 mx-auto align-self-center">
               <p class="opacity-70 text-uppercase small ls-1">{{$post->category->name}}</p>
+              <p class="opacity-70 text-uppercase small ls-1">{{$post->description}}</p>
               <h1 class="display-4 mt-7 mb-8">{{$post->title}}</h1>
               <p><span class="opacity-70 mr-1">By</span> <a class="text-white" href="#">{{$post->user->name}}</a></p>
             </div>
@@ -29,6 +30,30 @@
               <a class="badge badge-pill badge-secondary" href="{{route('blog.tag', $tag->id)}}">{{$tag->name}}</a>
             @endforeach
           </div>
+          <hr>
+
+          <h5><i class="fa fa-commenting-o" aria-hidden="true"></i> แสดงความคิดเห็น</h5>
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <textarea name="name" rows="8" cols="80"></textarea>
+                  </div>
+                  <div class="col-md-1">
+                    <input type="submit" name="" value="ส่งข้อความ" class="btn btn-success btn-sm">
+                  </div>
+                  <div class="col-md-11">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
 
         </div>
       </div>

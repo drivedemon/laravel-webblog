@@ -28,4 +28,8 @@ class Post extends Model
   public function user() {
     return $this->belongsTo(User::class);
   }
+
+  public function user_comment() {
+    return $this->belongsToMany(User::class)->withTimestamps();
+  }
 }

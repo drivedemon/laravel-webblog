@@ -94,7 +94,8 @@ class PostController extends Controller
   */
   public function update(UpdatePostRequest $request, Post $post)
   {
-    $data = $request->only(['title', 'description', 'content', 'category']);
+    $data = $request->only(['title', 'description', 'content']);
+    $data['category_id'] = $request->category;
     if ($request->hasFile('image')) {
       $image = $request->image->store('posts_image');
       $post->deleteImage();
