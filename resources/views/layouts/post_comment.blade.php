@@ -12,18 +12,18 @@
         <div class="row">
           <div class="col-md-12">
             @if(Session()->has('success'))
-              <div class="alert alert-success">
-                {{Session()->get('success')}}
-              </div>
-              <br>
+            <div class="alert alert-success">
+              {{Session()->get('success')}}
+            </div>
+            <br>
             @endif
             @if($errors->any())
-              <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                  {{$error}}
-                @endforeach
-              </div>
-              <br>
+            <div class="alert alert-danger">
+              @foreach($errors->all() as $error)
+              {{$error}}
+              @endforeach
+            </div>
+            <br>
             @endif
           </div>
           <div class="col-md-12">
@@ -39,4 +39,24 @@
     </div>
   </div>
 </form>
+@else
+<hr style="border: 0.5px solid;">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6" >
+      <div class="card">
+        <div class="card-body text-center" style="border-style: solid; border-width: 1px; border-radius: 3px; border-color: #D1DFD3; background-color: #E2EEE4;">
+        <label style="border-style: solid; border-width: 2px; border-radius: 8px;"></label>
+          กรุณา <a href="{{route('login')}}">เข้าสู่ระบบ</a> หรือ <a href="{{route('register')}}">สมัครสมาชิก</a>
+          <br>
+          เพื่อแสดงความคิดเห็น
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
 @endif

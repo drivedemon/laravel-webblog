@@ -33,8 +33,7 @@ class CreateCommentuserRequest extends FormRequest
      {
         return [
           'required' => 'กรุณากรอกข้อมูล',
-          'min' => 'กรุณากรอกตัวอักษรอย่างน้อย 1 ตัว'
-          'max' => 'ความยาวตัวอักษรเกิน 500 ตัว'
+          'unique' => 'ห้ามกรอกข้อมูลซ้ำ'
         ];
      }
 }
