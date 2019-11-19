@@ -262,3 +262,9 @@
         width: 80%;
     }
 }
+
+.fabutton {
+  background: none;
+  border: none;
+  float: right;
+}

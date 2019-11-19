@@ -69,7 +69,7 @@ class CommentController extends Controller
   */
   public function edit($id)
   {
-    //
+
   }
 
   /**
@@ -81,7 +81,17 @@ class CommentController extends Controller
   */
   public function update(Request $request, $id)
   {
-    //
+    if ($request->comment) {
+      DB::table('post_user_comment')
+            ->where('id', $id)
+            ->update(['comment' => $request->comment, 'updated_at' => now()]);
+
+      Session()->flash('success-comment', 'บันทึกข้อมูลเรียบร้อย');
+      return redirect()->back();
+    } else {
+      Session()->flash('error-comment', 'กรุณาใส่ข้อความ');
+      return redirect()->back();
+    }
   }
 
   /**
@@ -92,6 +102,8 @@ class CommentController extends Controller
   */
   public function destroy($id)
   {
-    //
+    DB::table('post_user_comment')->where('id', '=', $id)->delete();
+    Session()->flash('success-comment', 'ลบข้อมูลเรียบร้อย');
+    return redirect()->back();
   }
 }

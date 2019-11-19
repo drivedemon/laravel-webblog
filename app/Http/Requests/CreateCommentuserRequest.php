@@ -33,7 +33,6 @@ class CreateCommentuserRequest extends FormRequest
      {
         return [
           'required' => 'กรุณากรอกข้อมูล',
-          'unique' => 'ห้ามกรอกข้อมูลซ้ำ'
         ];
      }
 }

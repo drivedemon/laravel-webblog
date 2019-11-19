@@ -31,8 +31,6 @@
           @endforeach
         </div>
         @include('layouts.list_comment')
-
-
         @include('layouts.post_comment')
       </div>
     </div>
