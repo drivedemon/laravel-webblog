@@ -15,20 +15,21 @@
                         <div class="col-md-1">
                         </div>
                         <div class="col-md-10">
-
-                          <table class="table table-bordered table-hover">
-                            <thead>
-                              <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                                <th class="text text-center" style="vertical-align: middle;">ชื่อแท็ก</th>
-                                <th class="text text-center" width="15%">จำนวนบทความ</th>
-                                <th width="10%"></th>
-                                <th width="10%"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <div id="result"></div>
-                            </tbody>
-                          </table>
+                          <div class="table-responsive-sm">
+                            <table class="table table-bordered table-hover">
+                              <thead>
+                                <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                                  <th class="text text-center" style="vertical-align: middle;">ชื่อแท็ก</th>
+                                  <th class="text text-center" width="15%">จำนวนบทความ</th>
+                                  <th width="10%"></th>
+                                  <th width="10%"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <div id="result"></div>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                         <div class="col-md-1">
                         </div>

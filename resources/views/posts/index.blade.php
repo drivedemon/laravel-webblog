@@ -15,19 +15,21 @@
               <div class="col-md-1">
               </div>
               <div class="col-md-10">
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th width="15%"></th>
-                      <th class="text text-center" style="vertical-align: middle;">ชื่อบทความ</th>
-                      <th class="text text-center" width="15%">ประเภทบทความ</th>
-                      <th width="10%"></th>
-                      <th width="10%"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  </tbody>
-                </table>
+                <div class="table-responsive-sm">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr style="background-color: #efefef; height: 50px; color: #555555;">
+                        <th width="15%"></th>
+                        <th class="text text-center" style="vertical-align: middle;">ชื่อบทความ</th>
+                        <th class="text text-center" width="15%">ประเภทบทความ</th>
+                        <th width="10%"></th>
+                        <th width="10%"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               <div class="col-md-1">
               </div>
