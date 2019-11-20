@@ -15,11 +15,11 @@
               <div class="col-md-1">
               </div>
               <div class="col-md-10">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" width="100%">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
-                      <th class="text text-center" style="vertical-align: middle;">ชื่อประเภทบทความ </th>
-                      <th class="text text-center" width="15">จำนวนบทความ</th>
+                      <th class="text text-center" width="70%" style="vertical-align: middle;">ชื่อประเภทบทความ </th>
+                      <th class="text text-center" width="10%">จำนวนบทความ</th>
                       <th width="10%"></th>
                       <th width="10%"></th>
                     </tr>

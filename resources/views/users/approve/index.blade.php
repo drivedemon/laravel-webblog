@@ -14,6 +14,7 @@
               </div>
               <div class="col-md-10">
                 @if ($users->count() > 0)
+                <div class="table-responsive-sm">
                 <table class="table table-bordered table-hover">
                   <thead>
                     <tr style="background-color: #efefef; height: 50px; color: #555555;">
@@ -115,6 +116,7 @@
                     @endforeach
                   </tbody>
                 </table>
+              </div>
                 @else
                 <table class="table table-bordered table-hover">
                   <thead>

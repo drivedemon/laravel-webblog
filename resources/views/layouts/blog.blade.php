@@ -14,7 +14,7 @@
 
   <link rel="apple-touch-icon" href="{{asset('img/apple-touch-icon.png')}}">
   <link rel="icon" href="{{asset('img/favicon.png')}}">
-  
+
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
@@ -38,7 +38,9 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="{{route('home')}}">Homepage</a>
-              <a class="dropdown-item" href="{{route('user.edit')}}">Edit profile</a>
+              @if(auth()->user()->role == 'approve' || auth()->user()->role == 'admin')
+                <a class="dropdown-item" href="{{route('user.edit')}}">Edit profile</a>
+              @endif
               <a class="dropdown-item" href="{{route('logout')}}"
               onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>

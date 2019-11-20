@@ -1,4 +1,4 @@
-@if(Auth::check() && auth()->user()->role_pending != 'noapprove')
+@if(Auth::check() && auth()->user()->role_pending == 'approve' || auth()->user()->role_pending == 'admin')
 <hr style="border: 0.5px solid;">
 <form action="{{route('comment.store')}}" method="post" enctype="multipart/form-data">
   @csrf
@@ -39,6 +39,24 @@
     </div>
   </div>
 </form>
+@elseif (Auth::check() && auth()->user()->role_pending == 'noapprove' || auth()->user()->role == 'pending')
+<hr style="border: 0.5px solid;">
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-6" >
+      <div class="card">
+        <div class="card-body text-center" style="border-style: solid; border-width: 1px; border-radius: 3px; border-color: #D1DFD3; background-color: #E2EEE4;">
+          สิทธิ์ของท่านยังไม่อนุมัติ<br>
+          กรุณาติดต่อ admin เพื่อดำเนินการ
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+    </div>
+  </div>
+</div>
 @else
 <hr style="border: 0.5px solid;">
 <div class="container">
