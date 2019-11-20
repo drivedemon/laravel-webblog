@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\Tag;
+use App\User;
 use DB;
 
 class PostController extends Controller
@@ -37,5 +38,14 @@ class PostController extends Controller
     ->with('tags', Tag::all())
     ->with('tag', $tag)
     ->with('posts', $tag->post()->paginate(2));
+  }
+
+  public function showuser(User $user) {
+    return view('blog.showuser')
+    ->with('categories', Category::all())
+    ->with('tags', Tag::all())
+    ->with('user', $user)
+    ->with('posts', $user->post()->paginate(2));
+    dd($user->post()->get());
   }
 }

@@ -10,7 +10,7 @@
         <p class="opacity-70 text-uppercase small ls-1">{{$post->category->name}}</p>
         <p class="opacity-70 text-uppercase small ls-1">{{$post->description}}</p>
         <h1 class="display-4 mt-7 mb-8">{{$post->title}}</h1>
-        <p><span class="opacity-70 mr-1">By</span> <a class="text-white" href="#">{{$post->user->name}}</a></p>
+        <p><span class="opacity-70 mr-1">By</span> <a class="text-white" href="{{route('blog.showuser', $post->user->id)}}">{{$post->user->name}}</a></p>
       </div>
       <div class="col-12 align-self-end text-center">
         <a class="scroll-down-1 scroll-down-white" href="#section-content"><span></span></a>
