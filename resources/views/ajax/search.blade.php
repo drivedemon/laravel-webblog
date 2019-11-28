@@ -48,6 +48,7 @@
       if (data.table_data.length == 0) {
         if (page == '') {
           $('tbody').html("<tr><td align='center' colspan='5'>ไม่พบข้อมูล</td></tr>")
+          $('#total').text(data.total_data)
           $('.loading').hide()
           return
         }

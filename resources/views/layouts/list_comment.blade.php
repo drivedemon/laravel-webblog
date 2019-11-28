@@ -17,7 +17,7 @@
   <div class="card">
     <div class="card-header">
       @auth
-        @if(auth()->user()->id == $comment->user_id)
+        @if(auth()->user()->id == $comment->user_id || auth()->user()->role == 'admin')
         <form class="delete_comment" action="{{route('comment.destroy', $comment->id)}}" method="post">
           @csrf
           ความคิดเห็นที่ {{$rank}}

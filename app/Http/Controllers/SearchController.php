@@ -8,7 +8,6 @@ use DB;
 class SearchController extends Controller
 {
   function action(Request $request) {
-    DB::enableQueryLog();
     if ($request->ajax()) {
       $output = '';
       $flagNdata = '';

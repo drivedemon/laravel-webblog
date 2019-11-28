@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Tag;
 use App\Category;
 use App\Post;
+use DB;
 
 class WelcomeController extends Controller
 {
